@@ -1,10 +1,10 @@
 // mongo < crud.js
 
-use fligths
+use fligthData
 
-db.flightData.find().pretty()
+db.flights.find().pretty()
 
-db.flightData.insertOne(
+db.flights.insertOne(
 	{     
 		"departureAirport": "MUC",     
 		"arrivalAirport": "SFO",     
@@ -15,7 +15,7 @@ db.flightData.insertOne(
 	}
 )
 
-db.flightData.insertOne(
+db.flights.insertOne(
   {
     "departureAirport": "LHR",
     "arrivalAirport": "TXL",
@@ -25,17 +25,17 @@ db.flightData.insertOne(
   }
 )
 
-db.flightData.find().pretty()
+db.flights.find().pretty()
  
-db.flightData.deleteOne({departureAirport: "MUC"})
+db.flights.deleteOne({departureAirport: "MUC"})
 
-db.flightData.updateOne({distance: 950}, {$set: {marker: "toDelete"}})
+db.flights.updateOne({distance: 950}, {$set: {marker: "toDelete"}})
 
-db.flightData.find().pretty()
+db.flights.find().pretty()
 
-db.flightData.deleteMany({marker: "toDelete"})
+db.flights.deleteMany({marker: "toDelete"})
 
-db.flightData.insertMany(
+db.flights.insertMany(
 	[
 	  {
 		"departureAirport": "MUC",
@@ -54,7 +54,7 @@ db.flightData.insertMany(
 	]
 )
 
-db.flightData.find({distance: {$gt: 1000}}).pretty()
+db.flights.find({distance: {$gt: 1000}}).pretty()
 
 db.passengers.insertMany(
 	[
@@ -152,7 +152,7 @@ db.passengers.find().forEach((passenger) => printjson(passenger))
 db.passengers.find({}, {name: 1, age: 1, _id: 0})
 
 // Embedded Documents
-db.flightData.updateMany({}, {$set: {status: { description: "on-time", lastUpdated: "1 hour ago"}}})
+db.flights.updateMany({}, {$set: {status: { description: "on-time", lastUpdated: "1 hour ago"}}})
 
 // Arrays
 db.passengers.updateOne({name: "Klaus Arber"}, {$set: {hobbies: ["sports", "cooking"]}})

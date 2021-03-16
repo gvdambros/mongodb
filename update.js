@@ -59,6 +59,7 @@ db.users.updateOne(
 	}
 )
 
+// Add addicted field to users that have sport as hobbie with frequency greater than 2
 db.users.updateMany(
 	{
 		hobbies: 
@@ -80,6 +81,7 @@ db.users.updateMany(
 	}
 )
 
+// Decrease the frequency of all hobbies of users older than 30
 db.users.updateMany(
 	{
 		"age":
@@ -90,6 +92,53 @@ db.users.updateMany(
 	{
 		$inc: {
 			"hobbies.$[].frequency": -1
+		}
+	}
+)
+
+// Add fiels good frequency to hobbies with frequency greater than 2
+db.users.updateMany(
+	{
+		"hobbies.frequency": {
+			$gt:2
+		}
+	},
+	{
+		$set: {
+			"hobbies.$[el].goodFrequency": true
+		}
+	},
+	{
+		arrayFilters: [
+			{
+				"el.frequency": {
+					$gt: 2
+				}
+				
+			}
+		]
+	}
+)
+
+// Add hobbies to Ana
+db.users.updateOne(
+	{
+		name: "Anna" 
+	},
+	{
+		$push: {
+			hobbies: {
+				$each: [
+					{
+						title: "Read",
+						frequency: 2
+					},
+					{
+						title: "Study",
+						frequency: 7	
+					},
+				]
+			}
 		}
 	}
 )
