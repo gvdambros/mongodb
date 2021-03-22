@@ -1,3 +1,5 @@
+use personData
+
 // Give some mtrics of the executed code 
 db.people.explain("executionStats").find({"dob.age": {$gt: 60}})
 
